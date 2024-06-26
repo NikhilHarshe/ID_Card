@@ -34,9 +34,9 @@ function App() {
           </PrivateRouts>
         } />
         <Route path='/detailsform/:fieldsId/:role' element={
-          <PrivateRouts>
+          // <PrivateRouts>
             <Secondform />
-          </PrivateRouts>
+          // </PrivateRouts>
         } />
         <Route path='/admin' element={
           <PrivateRouts>
