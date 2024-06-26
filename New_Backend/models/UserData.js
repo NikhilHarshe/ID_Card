@@ -26,18 +26,18 @@ const userSchema = new mongoose.Schema({
     Token: {
         type: String,
     },
-    StudentFields : {
-        type : mongoose.Schema.ObjectId,
-        ref: "Fields",
-    },
-    EmployeeFields : {
-        type : mongoose.Schema.ObjectId,
-        ref: "Fields",
-    },
-    StaffFields : {
-        type : mongoose.Schema.ObjectId,
-        ref: "Fields",
-    },
+    // StudentFields : {
+    //     type : mongoose.Schema.ObjectId,
+    //     ref: "Fields",
+    // },
+    // EmployeeFields : {
+    //     type : mongoose.Schema.ObjectId,
+    //     ref: "Fields",
+    // },
+    // StaffFields : {
+    //     type : mongoose.Schema.ObjectId,
+    //     ref: "Fields",
+    // },
     CardData : {
         type: mongoose.Schema.ObjectId,
         ref: "CardData"

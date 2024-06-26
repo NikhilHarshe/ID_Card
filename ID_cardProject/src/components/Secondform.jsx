@@ -1,36 +1,43 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { getFormFiels } from "../services/opretions/userApi";
-import { saveFormData } from "../services/opretions/fieldApi";
+import { getFormFiels, saveFormData } from "../services/opretions/fieldApi";
 import toast from "react-hot-toast";
-// import { toast } from "react-toastify"; // Ensure you have react-toastify installed and configured
+import { useSelector } from "react-redux";
 
 function Secondform() {
   const navigate = useNavigate();
-  const { user, role } = useParams();
+  const { user } = useSelector((state) => state.auth);
+  const { _id } = user;
+  const { fieldsId, role } = useParams();
 
   const [formFields, setFormFields] = useState({});
   console.log("formFields: ", formFields);
 
+  // const getFilds = async () => {
+  //   const data = await getFormFiels({ _id: fieldsId, role });
+  //   if (role === "Student") {
+  //     console.log("data in getFilds ", data.user.StudentFields);
+  //     setFormFields(data.user?.StudentFields);
+  //   } else if (role === "Employee") {
+  //     setFormFields(data.user?.EmployeeFields);
+  //   } else if (role === "Staff") {
+  //     setFormFields(data.user?.StaffFields);
+  //   }
+  // };
   const getFilds = async () => {
-    const data = await getFormFiels({ _id: user, role });
-    if (role === "Student") {
-      console.log("data in getFilds ", data.user.StudentFields);
-      setFormFields(data.user?.StudentFields);
-    } else if (role === "Employee") {
-      setFormFields(data.user?.EmployeeFields);
-    } else if (role === "Staff") {
-      setFormFields(data.user?.StaffFields);
-    }
-  };
+    const data = await getFormFiels({_id: fieldsId});
+    setFormFields(data.formfield);
+    console.log("data in form: ", data);
+  }
 
   useEffect(() => {
     getFilds();
-  }, [user, role]);
+  }, [fieldsId, role]);
 
   const [formData, setFormData] = useState({
-    _id: user,
+    _id,
+    fieldsId,
     role,
     aadharnumber: "",
     name: "",
@@ -63,7 +70,8 @@ function Secondform() {
       [name]: files[0],
     });
   };
-
+  
+  console.log("formData in side 2nd form ", formData);
   const handleSubmit = async () => {
     // Handle form submission, for example, send data to an API
     console.log("formData in side 2nd form ", formData);
@@ -338,10 +346,7 @@ function Secondform() {
                 <input
                   type="file"
                   name="uploadyourPassport"
-                  accept="image/*"
-                  placeholder="Upload Passport"
-                  value={formData.uploadyourPassport}
-                  onChange={handleChange}
+                  onChange={handleFileChange}
                   className="px-4 py-3 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
                   required
                 />

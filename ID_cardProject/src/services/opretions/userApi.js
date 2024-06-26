@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiconnector";
-import { userEndpoints } from "../apis";
+import { fildsEndpoints, userEndpoints } from "../apis";
 import { setToken, setUser } from "../../redux/slices/authSlice";
 // import { setLoading, setToken } from "../../slices/authSlice";
 // import { setUser } from "../../slices/userSlice";
@@ -10,8 +10,12 @@ const {
     USER_LOGIN_API,
     UPDATE_USER_DATA_API,
     SHOW_USER_DETAILS_API,
-    GET_FORMS_FIELDS_API
+    // GET_FORMS_FIELDS_API
 } = userEndpoints;
+
+const {
+    GET_FORMS_FIELDS_API
+} = fildsEndpoints;
 
 export const signUp = async (data, navigate) => {
     let result = null
@@ -140,21 +144,23 @@ export const getUserDetails = async (Token) => {
     return result
 }
 
-export const getFormFiels = async (data) => {
-    const toastId = toast.loading("Loading...");
-    let result = null
-    try{
-        console.log("data in getFormFiels : ", data);
-        const res = await apiConnector("POST" , GET_FORMS_FIELDS_API, data);
-        console.log("res ", res.data);
-        result = res.data;
-    }
-    catch(error) {
-        console.log(error);
-    }
-    toast.dismiss(toastId);
-    return result
-}
+// export const getFormFiels = async (data) => {
+//     const toastId = toast.loading("Loading...");
+//     let result = null
+//     try{
+//         console.log("data in getFormFiels : ", data);
+//         const res = await apiConnector("POST" , GET_FORMS_FIELDS_API, data);
+//         console.log("res ", res.data);
+//         result = res.data;
+//     }
+//     catch(error) {
+//         console.log(error);
+//     }
+//     toast.dismiss(toastId);
+//     return result
+// }
+
+
 
 export const logout = async (navigate, dispatch) => {
     await dispatch(setToken(null))

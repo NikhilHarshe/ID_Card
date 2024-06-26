@@ -1,6 +1,10 @@
 const mongoose = require("mongoose")
 
 const RequiredFieldsSchema = mongoose.Schema({
+    schoolName: {
+        type: String,
+        required: true,
+    },
     template: {
         type: String,
         required: true,
@@ -65,10 +69,14 @@ const RequiredFieldsSchema = mongoose.Schema({
         type : Boolean,
         required: true,
     },
-    user : {
+    admin : {
         type : mongoose.Schema.ObjectId,
         ref: "User"
-    }
+    },
+    user: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "CardData",
+    }]
 })
 
 module.exports = mongoose.model("Fields", RequiredFieldsSchema);

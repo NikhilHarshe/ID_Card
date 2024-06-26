@@ -270,39 +270,39 @@ exports.getUserDetails = async (req, res) => {
 };
 
 
-exports.getFormFields = async (req, res) => {
-    try {
-        const { _id, role } = req.body;
-        console.log("req.body ", req.body);
+// exports.getFormFields = async (req, res) => {
+//     try {
+//         const { _id, role } = req.body;
+//         console.log("req.body ", req.body);
         
-        let user = {};
-        if (role === "Student") {
-            user = await User.findById(_id).populate('StudentFields').exec();
-        } else if(role === "Employee") {
-            user = await User.findById(_id).populate('EmployeeFields').exec();
-        } else if(role === "Staff") {
-            user = await User.findById(_id).populate('StaffFields').exec();
-        }
+//         let user = {};
+//         if (role === "Student") {
+//             user = await User.findById(_id).populate('StudentFields').exec();
+//         } else if(role === "Employee") {
+//             user = await User.findById(_id).populate('EmployeeFields').exec();
+//         } else if(role === "Staff") {
+//             user = await User.findById(_id).populate('StaffFields').exec();
+//         }
 
-        if (!user) {
-            return res.status(400).json({
-                success: false,
-                message: "User not Present. Please Sign up to continue.",
-            });
-        }
+//         if (!user) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: "User not Present. Please Sign up to continue.",
+//             });
+//         }
 
-        return res.status(200).json({
-            success: true,
-            user,
-            message: `form fiels get succesfuly`,
-        });
-    }
-    catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Please try again.",
-        });
-    }
-};
+//         return res.status(200).json({
+//             success: true,
+//             user,
+//             message: `form fiels get succesfuly`,
+//         });
+//     }
+//     catch (error) {
+//         console.log(error);
+//         return res.status(500).json({
+//             success: false,
+//             error: error.message,
+//             message: "Please try again.",
+//         });
+//     }
+// };

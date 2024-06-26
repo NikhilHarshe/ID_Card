@@ -19,6 +19,9 @@ const Navbar = () => {
                 <div className='hidden md:block'>
                     <ul className='flex gap-5'>
                         <li onClick={() => navigate("/")} className='cursor-pointer'>Home</li>
+                        {
+                            user && <li onClick={() => navigate("/card")}>Admin</li>
+                        }
                         <li className='cursor-pointer'>About Us</li>
                         <li className='cursor-pointer'>Contact Us</li>
                         <li className='cursor-pointer'>Templets</li>

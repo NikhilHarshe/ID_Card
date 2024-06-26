@@ -9,6 +9,7 @@ import Forms from './components/Forms'
 import PrivateRouts from "./components/auth/PrivateRouts"
 import FormsFilds from './components/FormsFilds'
 import Secondform from './components/Secondform'
+import Admin from './pages/Admin'
 
 function App() {
 
@@ -32,9 +33,14 @@ function App() {
             <FormsFilds />
           </PrivateRouts>
         } />
-        <Route path='/detailsform/:user/:role' element={
+        <Route path='/detailsform/:fieldsId/:role' element={
           <PrivateRouts>
             <Secondform />
+          </PrivateRouts>
+        } />
+        <Route path='/admin' element={
+          <PrivateRouts>
+            <Admin />
           </PrivateRouts>
         } />
       </Routes>

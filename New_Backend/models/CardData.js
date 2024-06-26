@@ -60,10 +60,18 @@ const CardDataSchema = mongoose.Schema({
         type: String,
         trim: true,
     },
-    user :{
+    schoolName : {
+        type: String,
+        trim: true,
+    },
+    admin :{
         type: mongoose.Schema.ObjectId,
         ref: "User"
     },
+    formField : {
+        type: mongoose.Schema.ObjectId,
+        ref: "Fields"
+    }
 })
 
 module.exports = mongoose.model("CardData", CardDataSchema);

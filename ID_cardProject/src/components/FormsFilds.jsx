@@ -14,6 +14,7 @@ const FormsFields = () => {
   const { _id } = user;
 
   const [formData, setFormData] = useState({
+    schoolName: "",
     _id: _id,
     template: templateType,
     role: '',
@@ -57,6 +58,7 @@ const FormsFields = () => {
   const handleRoleChange = (e) => {
     if (formData.role !== '') {
       setFormData({
+        schoolName:"",
         name: false,
         classN: false,
         section: false,
@@ -73,7 +75,7 @@ const FormsFields = () => {
         aadharCard: false
       });
 
-      for(let key in fields){
+      for (let key in fields) {
         setFormData({
           ...formData,
           [key]: unchecked
@@ -92,7 +94,11 @@ const FormsFields = () => {
       toast.error("First Select Role");
       return
     }
-    const { name, checked } = e.target;
+    const { name, checked, value } = e.target;
+    if (name === "schoolName" && value === '') {
+      toast.error("Please Enter School Name");
+      return
+    }
     const selectedCount = Object.values(formData).filter(value => value === true).length;
     const maxSelections = formData.role === 'Student' ? 7 : 10;
 
@@ -101,31 +107,39 @@ const FormsFields = () => {
       return; // Prevent further selections if limit is reached
     }
 
-    setFormData({
-      ...formData,
-      [name]: checked
-    });
+    if (name === "schoolName") {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: checked
+      });
+    }
   };
 
   console.log("Form data in FormFiels : ", formData);
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     // Navigate to the second form and pass the form data
     console.log("Form data in FormFiels : ", formData);
     // navigate('/detailsform', { state: { formData } });
 
-    const data = createFields(formData);
-    const link = `http://localhost:5173/detailsform/${_id}/${formData.role}`
+    const data = await createFields(formData);
+    console.log("created fields data ", data);
+    const link = `http://localhost:5173/detailsform/${data._id}/${formData.role}`
     console.log("link : ", link);
     setLinkURL(link);
   };
 
-  const [copySuccess, setCopySuccess] = useState('');
+  // const [copySuccess, setCopySuccess] = useState('');
 
   const handleCopyClick = async (e) => {
     e.preventDefault();
     try {
       await navigator.clipboard.writeText(linkURL);
-      setCopySuccess('Copied!');
+      // setCopySuccess('Copied!');
       toast.success("Link Copied!");
     } catch (err) {
       setCopySuccess('Failed to copy!');
@@ -183,26 +197,33 @@ const FormsFields = () => {
       </div>
 
       <form className="font-[sans-serif] max-w-4xl mx-auto">
-        <div className="grid sm:grid-cols-2 gap-4">
-          {
-            fields.map((field, index) => (
-              <div key={index} className="relative flex items-center">
-                <div className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border rounded capitalize">
-                  {field}
+        <div className=' flex flex-col'>
+          <div className=' flex w-full gap-5 justify-center mb-12 align-middle items-center '>
+            <label htmlFor="schoolName" className=' text-2xl'>Enter School Name <span className=' text-red-500'>*</span> </label>
+            <input type="text" value={formData.schoolName} name='schoolName' onChange={handleFieldChange} placeholder='Enter School Name Here'  className="px-4 py-3 bg-[#f0f1f2] focus:bg-transparent text-black w-[70%] text-sm border outline-[#007bff] rounded transition-all"/>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {
+              fields.map((field, index) => (
+                <div key={index} className="relative flex items-center">
+                  <div className="px-4 py-3 bg-[#f0f1f2] text-black w-full text-sm border rounded capitalize">
+                    {field}
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      name={field}
+                      className="h-5 w-5 ml-2"
+                      checked={formData[field]}
+                      onChange={handleFieldChange}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    name={field}
-                    className="h-5 w-5 ml-2"
-                    checked={formData[field]}
-                    onChange={handleFieldChange}
-                  />
-                </div>
-              </div>
-            ))
-          }
+              ))
+            }
+          </div>
         </div>
+
         <div className=' flex gap-3'>
           <div className=' flex w-full'>
             <button

@@ -18,7 +18,7 @@ function Card() {
           <h3 className="text-3xl text-[#333] font-extrabold justify-center items-center">Select Template</h3>
         </div>
       </div>
-      <div className="bg-white shadow-[0_2px_15px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-2xl font-[sans-serif] overflow-hidden mx-auto mt-4 hover:scale-105 hover:duration-500">
+      <div className="bg-white shadow-[0_2px_15px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-2xl font-[sans-serif] overflow-hidden mx-auto mt-4 hover:scale-105 hover:duration-500" onClick={() => navigate("/admin")}>
         <img
           src={image2}
           className="w-full " style={{ borderRadius: '1rem 1rem 0 0' }}
