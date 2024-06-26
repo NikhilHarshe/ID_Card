@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 
 function Secondform() {
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
-  const { _id } = user;
+  //const { user } = useSelector((state) => state.auth);
+  //const { _id } = user;
   const { fieldsId, role } = useParams();
 
   const [formFields, setFormFields] = useState({});
@@ -36,7 +36,6 @@ function Secondform() {
   }, [fieldsId, role]);
 
   const [formData, setFormData] = useState({
-    _id,
     fieldsId,
     role,
     aadharnumber: "",
