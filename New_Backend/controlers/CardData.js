@@ -12,7 +12,7 @@ const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 exports.saveCardData = async (req, res) => {
     try {
-        const { fieldsId, _id, role, aadharnumber, name, section, contactNumber, address, Class, dateofBirth,  admissionNo, bloodGroup, designation, rollNo, emergencyConNo, modeOfTransportation } = req.body;
+        const { fieldsId, role, aadharnumber, name, section, contactNumber, address, Class, dateofBirth,  admissionNo, bloodGroup, designation, rollNo, emergencyConNo, modeOfTransportation } = req.body;
 
         console.log("req.body1 : ", req.body);
         console.log("req.files : ", req.files)
@@ -52,7 +52,7 @@ exports.saveCardData = async (req, res) => {
             emergencyConNo: emergencyConNo || null,
             modeOfTransportation: modeOfTransportation ? modeOfTransportation.trim() : null,
             role: role.trim(),
-            admin: _id, // Assuming _id is the user ID
+            // admin: _id, // Assuming _id is the user ID
             schoolName: fieldData.schoolName,
             formField: fieldData._id,
         });
@@ -61,13 +61,13 @@ exports.saveCardData = async (req, res) => {
         const savedData = await cardData.save();
 
         // Update the User document
-        const updatedAdmin = await User.findByIdAndUpdate(_id, { $push: { CardData: savedData._id } }, { new: true });
+        // const updatedAdmin = await User.findByIdAndUpdate(_id, { $push: { CardData: savedData._id } }, { new: true });
         const updatedFieldsData = await Fields.findByIdAndUpdate(fieldsId, { $push: { user: savedData._id } }, { new: true });
 
         return res.status(200).json({
             success: true,
             savedData,
-            updatedAdmin,
+            // updatedAdmin,
             updatedFieldsData,
             message: "User Data Saved Successfully",
         });
