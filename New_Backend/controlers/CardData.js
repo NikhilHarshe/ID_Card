@@ -55,6 +55,7 @@ exports.saveCardData = async (req, res) => {
             // admin: _id, // Assuming _id is the user ID
             schoolName: fieldData.schoolName,
             formField: fieldData._id,
+            template : fieldData.template
         });
 
         // Save the document to the database

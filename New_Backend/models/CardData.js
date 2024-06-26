@@ -1,6 +1,10 @@
 const mongoose = require("mongoose")
 
 const CardDataSchema = mongoose.Schema({
+    template: {
+        type: String,
+        required: true,
+    },
     aadharnumber: {
         type: Number,
         trim:true, 

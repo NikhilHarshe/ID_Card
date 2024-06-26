@@ -10,6 +10,9 @@ import PrivateRouts from "./components/auth/PrivateRouts"
 import FormsFilds from './components/FormsFilds'
 import Secondform from './components/Secondform'
 import Admin from './pages/Admin'
+// import IdCard from './pages/IdCard'
+import IdCardJDVertical from './pages/IdCardJDVertical'
+import IdCardJDHorizontal from './pages/IdCardJDHorizontal'
 
 function App() {
 
@@ -41,6 +44,16 @@ function App() {
         <Route path='/admin' element={
           <PrivateRouts>
             <Admin />
+          </PrivateRouts>
+        } />
+        <Route path='/IdCardV' element={
+          <PrivateRouts>
+            <IdCardJDVertical />
+          </PrivateRouts>
+        } />
+        <Route path='/IdCardH' element={
+          <PrivateRouts>
+            <IdCardJDHorizontal />
           </PrivateRouts>
         } />
       </Routes>
