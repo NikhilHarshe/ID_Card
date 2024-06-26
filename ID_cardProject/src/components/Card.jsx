@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+
 import React from "react";
 import image1 from "../assets/complete-work-concept-work-report-with-check-mark-work-checklist-employee-is-checking-report_675567-1496.jpg"
 import image2 from '../assets/plastic-id-card-personal-identity-card-driver-license-identification-verification_349999-508.jpg'

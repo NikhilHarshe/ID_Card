@@ -4,24 +4,10 @@ import image1 from '../assets/user.png';
 import { useNavigate } from "react-router-dom";
 
 function Cards() {
-  const [templateType, setTemplateType] = useState("");
+  
   const navigate = useNavigate();
 
 
-  // console.log("Template : ", templateType);
-  // const ClickHandler = () => {
-  //   setTemplateType("vertical"); 
-  //   // navigate("/forms", {state : {templateType}})
-  //   console.log("inside : ", templateType);
-  // }
-
-  // const navigateHandler = () => {
-  //   navigate("/forms", {state : { temp : "templateType"}})
-  // }
-
-  // useEffect(() => {
-  //   navigateHandler()
-  // }, [templateType])
 
   return (
     <div className="flex flex-col md:flex-row min-h-[80vh] justify-center items-center gap-4 p-4 mt-4 mb-4">
