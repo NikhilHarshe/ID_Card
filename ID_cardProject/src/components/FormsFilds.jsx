@@ -128,7 +128,7 @@ const FormsFields = () => {
 
     const data = await createFields(formData);
     console.log("created fields data ", data);
-    const link = ` https://id-card-jx6i.onrender.com/detailsform/${data._id}/${formData.role}`
+    const link = `https:/id-card-wheat.vercel.app/detailsform/${data._id}/${formData.role}`
     console.log("link : ", link);
     setLinkURL(link);
   };
