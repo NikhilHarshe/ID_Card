@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../services/opretions/userApi'
@@ -24,19 +25,21 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-      <h2 className=' text-2xl font-bold'>Enter your UserID and Password</h2>
+    <div className='sm:mt-[-82px]'>
+      <div className='w-full max-w-md mx-auto mb-14 p-5 '>
+      <h2 className='text-2xl font-bold text-center'>Enter your UserID and Password</h2>
       <form action="" onSubmit={submitHandler}>
         <div className=' mt-4'>
-            <label className=' text-lg font-semibold' htmlFor="UserID">UserID <span className=' text-lg text-red-500'>*</span> </label><br />
-            <input name="Email" onChange={changeHandler} value={formdata.Email} className=' border-2 w-[28rem] px-4 py-2' type="text" placeholder='Enter Your UserID'/>
+            <label className=' text-lg font-semibold' htmlFor="UserID">UserID <span className=' text-lg text-red-500 '>*</span> </label><br />
+            <input name="Email" onChange={changeHandler} value={formdata.Email} className=' border-2 w-full px-4 py-2 mt-2 outline-blue-600' type="text" placeholder='Enter Your UserID'/>
         </div>
         <div className=' mt-4'>
             <label className=' text-lg font-semibold' htmlFor="Password">Password <span className=' text-lg text-red-500'>*</span> </label><br />
-            <input name="Password" onChange={changeHandler} value={formdata.Password} className=' border-2 w-[28rem] px-4 py-2' type="password"  placeholder='Enter Your Password'/>
+            <input name="Password" onChange={changeHandler} value={formdata.Password} className=' outline-blue-600 border-2 w-full px-4 py-2 mt-2' type="password"  placeholder='Enter Your Password'/>
         </div>
-        <button className=' bg-blue-600 hover:bg-blue-700 hover:text-white duration-150 px-3 py-2 rounded-md w-[7rem] text-gray-200 mt-7' type='submit' >Submit</button>
+        <button className=' bg-blue-600 hover:bg-blue-700 hover:text-white duration-150 px-3 py-2 rounded-md w-full mt-7 text-gray-200' type='submit' >Submit</button>
       </form>
+    </div>
     </div>
   )
 }

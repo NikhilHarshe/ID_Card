@@ -8,23 +8,23 @@ import { useNavigate } from "react-router-dom";
 function Card() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-row  h-[80vh] justify-center items-center card">
-      <div className="bg-white shadow-[0_2px_15px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-2xl font-[sans-serif] overflow-hidden mx-auto mt-4 hover:scale-105 hover:duration-500" onClick={() => navigate("/template")}>
+    <div className="flex gap-5 lg:gap-[9rem] flex-col md:flex-row h-[80vh] justify-center items-center card">
+      <div className="bg-white shadow-[0_2px_15px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-2xl font-[sans-serif] overflow-hidden mx-auto mt-4 md:mx-4" onClick={() => navigate("/template")}>
         <img
           src={image1}
           className="w-full h-[244px]" style={{ borderRadius: '1rem 1rem 0 0' }}
         />
         <div className="p-6">
-          <h3 className="text-3xl text-[#333] font-extrabold justify-center items-center">Select Template</h3>
+          <h3 className="text-3xl text-[#333] font-extrabold text-center">Select Template</h3>
         </div>
       </div>
-      <div className="bg-white shadow-[0_2px_15px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-2xl font-[sans-serif] overflow-hidden mx-auto mt-4 hover:scale-105 hover:duration-500" onClick={() => navigate("/admin")}>
+      <div className="bg-white shadow-[0_2px_15px_-6px_rgba(0,0,0,0.2)] w-full max-w-sm rounded-2xl font-[sans-serif] overflow-hidden mx-auto mt-4 md:mx-4" onClick={() => navigate("/admin")}>
         <img
           src={image2}
           className="w-full " style={{ borderRadius: '1rem 1rem 0 0' }}
         />
         <div className="p-6">
-          <h3 className="text-3xl text-[#333] font-extrabold justify-center items-center">Approve Form</h3>
+          <h3 className="text-3xl text-[#333] font-extrabold text-center">Approve Form</h3>
         </div>
       </div>
     </div>
