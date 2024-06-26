@@ -130,7 +130,7 @@ const FormsFields = () => {
     console.log("created fields data ", data);
     // const link = `https://id-card-wheat.vercel.app/detailsform/${data._id}/${formData.role}`
     // const link = `http://localhost:5173/detailsform/${data._id}/${formData.role}`
-    const link = `https://id-card-wheat.vercel.app/detailsform/${data._id}/${formData.role}`
+    const link = `https://id-card-wheat.vercel.app/#/detailsform/${data._id}/${formData.role}`
     console.log("link : ", link);
     setLinkURL(link);
   };
