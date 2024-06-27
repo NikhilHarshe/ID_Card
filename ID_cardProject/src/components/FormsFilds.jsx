@@ -94,11 +94,11 @@ const FormsFields = () => {
       toast.error("First Select Role");
       return
     }
-    const { name, checked, value } = e.target;
-    if (name === "schoolName" && value === '') {
-      toast.error("Please Enter School Name");
+    if (formData.schoolName === '' && e.target.name !== "schoolName") {
+      toast.error("Place Enter School Name");
       return
     }
+    const { name, checked, value } = e.target;
     const selectedCount = Object.values(formData).filter(value => value === true).length;
     const maxSelections = formData.role === 'Student' ? 7 : 10;
 
@@ -139,6 +139,9 @@ const FormsFields = () => {
 
   const handleCopyClick = async (e) => {
     e.preventDefault();
+    if(linkURL === ""){
+      return
+    }
     try {
       await navigator.clipboard.writeText(linkURL);
       // setCopySuccess('Copied!');

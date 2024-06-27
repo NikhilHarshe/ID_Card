@@ -1,42 +1,16 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getFormFiels, saveFormData } from "../services/opretions/fieldApi";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import Modal from "react-modal"; // Add this if you're using a modal library like react-modal
 
 function Secondform() {
   const navigate = useNavigate();
-  // const { user } = useSelector((state) => state.auth);
-  // const { _id } = user;
   const { fieldsId, role } = useParams();
 
   const [formFields, setFormFields] = useState({});
-  console.log("formFields: ", formFields);
-
-  // const getFilds = async () => {
-  //   const data = await getFormFiels({ _id: fieldsId, role });
-  //   if (role === "Student") {
-  //     console.log("data in getFilds ", data.user.StudentFields);
-  //     setFormFields(data.user?.StudentFields);
-  //   } else if (role === "Employee") {
-  //     setFormFields(data.user?.EmployeeFields);
-  //   } else if (role === "Staff") {
-  //     setFormFields(data.user?.StaffFields);
-  //   }
-  // };
-  const getFilds = async () => {
-    const data = await getFormFiels({_id: fieldsId});
-    setFormFields(data.formfield);
-    console.log("data in form: ", data);
-  }
-
-  useEffect(() => {
-    getFilds();
-  }, [fieldsId, role]);
-
   const [formData, setFormData] = useState({
-    // _id,
     fieldsId,
     role,
     aadharnumber: "",
@@ -54,6 +28,16 @@ function Secondform() {
     emergencyConNo: "",
     modeOfTransportation: "",
   });
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const getFilds = async () => {
+    const data = await getFormFiels({ _id: fieldsId });
+    setFormFields(data.formfield);
+  };
+
+  useEffect(() => {
+    getFilds();
+  }, [fieldsId, role]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,13 +54,15 @@ function Secondform() {
       [name]: files[0],
     });
   };
-  
-  console.log("formData in side 2nd form ", formData);
-  const handleSubmit = async () => {
-    // Handle form submission, for example, send data to an API
-    console.log("formData in side 2nd form ", formData);
+
+  const handleSubmit = () => {
+    setModalIsOpen(true);
+  };
+
+  const confirmSubmit = async () => {
     const response = await saveFormData(formData, navigate);
-    console.log("response : ", response);
+    console.log("response: ", response);
+    setModalIsOpen(false);
   };
 
   const {
@@ -96,13 +82,21 @@ function Secondform() {
     uploadYourPhoto,
   } = formFields;
 
+
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    if (formData.uploadyourPassport) {
+      const image = URL.createObjectURL(formData.uploadyourPassport)
+      setImage(image);
+    }
+  }, [formData.uploadyourPassport])
+
   return (
     <div className="mt-6 mb-6">
       <div className="font-[sans-serif] max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <form className="font-[sans-serif] max-w-4xl mx-auto">
           <div className="grid sm:grid-cols-2 gap-4">
-
-            {/* Aadhar Number */}
             {aadharCard && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="aadharnumber" className="mb-2 text-sm text-gray-700">
@@ -120,8 +114,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Name */}
             {name && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="name" className="mb-2 text-sm text-gray-700">
@@ -138,8 +130,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Section */}
             {section && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="section" className="mb-2 text-sm text-gray-700">
@@ -156,8 +146,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Contact Number */}
             {contactNumber && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="contactNumber" className="mb-2 text-sm text-gray-700">
@@ -174,8 +162,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Address */}
             {address && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="address" className="mb-2 text-sm text-gray-700">
@@ -192,8 +178,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Class */}
             {classN && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="Class" className="mb-2 text-sm text-gray-700">
@@ -210,8 +194,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Admission No */}
             {admissionNumber && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="admissionNo" className="mb-2 text-sm text-gray-700">
@@ -228,8 +210,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Blood Group */}
             {bloodGroup && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="bloodGroup" className="mb-2 text-sm text-gray-700">
@@ -246,8 +226,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Designation */}
             {designation && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="designation" className="mb-2 text-sm text-gray-700">
@@ -264,8 +242,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Roll Number */}
             {rollNumber && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="rollNo" className="mb-2 text-sm text-gray-700">
@@ -277,13 +253,11 @@ function Secondform() {
                   placeholder="Roll Number"
                   value={formData.rollNo}
                   onChange={handleChange}
-                  className="px-4 py-3 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
                   required
+                  className="px-4 py-3 bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all"
                 />
               </div>
             )}
-
-            {/* Emergency Contact No. */}
             {emergencyContact && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="emergencyConNo" className="mb-2 text-sm text-gray-700">
@@ -300,8 +274,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Mode Of Transportation */}
             {modeOfTransportation && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="modeOfTransportation" className="mb-2 text-sm text-gray-700">
@@ -318,8 +290,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Date Of Birth */}
             {dateofBirth && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="dateofBirth" className="mb-2 text-sm text-gray-700">
@@ -336,8 +306,6 @@ function Secondform() {
                 />
               </div>
             )}
-
-            {/* Upload Your Passport */}
             {uploadYourPhoto && (
               <div className="relative flex flex-col items-start">
                 <label htmlFor="uploadyourPassport" className="mb-2 text-sm text-gray-700">
@@ -377,6 +345,39 @@ function Secondform() {
           </div>
         </form>
       </div>
+
+      {/* Confirmation Modal */}
+      <Modal className={` w-3/12 m-auto mt-20 h-[30rem] `} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} contentLabel="Confirm Submission">
+        <h2 className=" text-center text-3xl font-semibold py-3">Confirm Submission</h2>
+        <div className=" w-[20rem] mx-auto flex flex-col justify-center align-middle items-cente  ">
+          <img src={image} className=" mx-auto mb-5 " width={130} alt="" />
+          <div className=" w-full ml-10">
+            {formData.name && <p className=" text-xl"><span className=" pr-4 font-semibold">Name:</span> {formData.name}</p>}
+            {formData.designation && <p className=" text-xl" ><span className=" pr-4 font-semibold">Designation: </span>{formData.designation}</p>}
+            {formData.Class && <p className=" text-xl" ><span className=" pr-4 font-semibold">Class: </span>{formData.Class}</p>}
+            {formData.rollNo && <p className=" text-xl" ><span className=" pr-4 font-semibold">Roll Number: </span>{formData.rollNo}</p>}
+            {formData.dateofBirth && <p className=" text-xl" ><span className=" pr-4 font-semibold">Date Of Birth: </span>{formData.dateofBirth}</p>}
+            {formData.contactNumber && <p className=" text-xl" ><span className=" pr-4 font-semibold">Contact Number: </span>{formData.contactNumber}</p>}
+            {formData.section && <p className=" text-xl" ><span className=" pr-4 font-semibold">Section: </span>{formData.section}</p>}
+            {formData.bloodGroup && <p className=" text-xl" ><span className=" pr-4 font-semibold">Blood Group: </span>{formData.bloodGroup}</p>}
+            {formData.admissionNo && <p className=" text-xl" ><span className=" pr-4 font-semibold">Admission Number: </span>{formData.admissionNo}</p>}
+            {formData.emergencyConNo && <p className=" text-xl" ><span className=" pr-4 font-semibold">Emergency Contact No.: </span>{formData.emergencyConNo}</p>}
+            {formData.aadharnumber && <p className=" text-xl" ><span className=" pr-4 font-semibold">Aadhar Number: </span>{formData.aadharnumber}</p>}
+            {formData.modeOfTransportation && <p className=" text-xl" ><span className=" pr-4 font-semibold">Mode Of Transportation: </span>{formData.modeOfTransportation}</p>}
+            {formData.address && <p className=" text-xl" ><span className=" pr-4 font-semibold">Address: </span>{formData.address}</p>}
+            {/* <p className=" text-xl" ><span className=" pr-4 font-semibold">Upload Your Passport:</p> */}
+
+          </div>
+        </div>
+        <div className=" flex gap-10 justify-center">
+          <button onClick={() => setModalIsOpen(false)} className="mt-4 px-4 py-2 bg-red-600 text-white rounded">
+            Cancel
+          </button>
+          <button onClick={confirmSubmit} className="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded">
+            Confirm
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }

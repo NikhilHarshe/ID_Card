@@ -34,7 +34,7 @@ const Admin = () => {
         };
 
         const filteredData = filterSchoolNames(data, schoolName);
-        setData1(filteredData);
+        setData1(filteredData.reverse());
     }, [data, schoolName]);
 
     const handleFieldChange = (e) => {
