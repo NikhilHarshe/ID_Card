@@ -3,11 +3,8 @@ import React, { useEffect, useState } from "react";
 import image1 from '../assets/user.png';
 import { useNavigate } from "react-router-dom";
 
-function Cards() {
-  
+function Cards() {  
   const navigate = useNavigate();
-
-
 
   return (
     <div className="flex flex-col md:flex-row min-h-[80vh] justify-center items-center gap-4 p-4 mt-4 mb-4">

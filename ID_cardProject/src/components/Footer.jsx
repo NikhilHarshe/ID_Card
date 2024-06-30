@@ -37,7 +37,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div className="lg:flex lg:items-center">
           <a href="javascript:void(0)">
-            <p className="w-52">Shriram ID Cards</p>
+            <p className="w-52 text-white">Shriram ID Cards</p>
           </a>
         </div>
 

@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import template from "../assets/JD Template.jpeg"
 import { useLocation } from 'react-router-dom'
 
-const IdCardJDVertical = () => {
+const IdCardJDVertical = (props) => {
+    console.log("Props : ", props);
     const location = useLocation();
-    const data = location.state?.item
+    const [data, setData] = useState([]);
+    // const data = location.state?.item
+
+    if(!location.state){
+        setData(props.data)
+    }
     console.log("data1 : ", data);
     // const data = {
     //     Class: "2",

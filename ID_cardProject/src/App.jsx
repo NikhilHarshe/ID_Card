@@ -13,6 +13,7 @@ import Admin from './pages/Admin'
 // import IdCard from './pages/IdCard'
 import IdCardJDVertical from './pages/IdCardJDVertical'
 import IdCardJDHorizontal from './pages/IdCardJDHorizontal'
+import Templates from './pages/Templates'
 
 function App() {
 
@@ -54,6 +55,11 @@ function App() {
         <Route path='/IdCardH' element={
           <PrivateRouts>
             <IdCardJDHorizontal />
+          </PrivateRouts>
+        } />
+        <Route path='/allTemplates' element={
+          <PrivateRouts>
+            <Templates />
           </PrivateRouts>
         } />
       </Routes>

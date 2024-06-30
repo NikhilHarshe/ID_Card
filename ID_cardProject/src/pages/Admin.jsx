@@ -54,6 +54,9 @@ const Admin = () => {
         <div className="w-11/12 mx-auto my-10">
             <div className="overflow-x-auto">
                 <div className=' flex w-full gap-5 justify-center mb-12 align-middle items-center relative'>
+                    <button onClick={ () => navigate("/allTemplates")} className=' bg-blue-500 px-3 py-2 text-white text-xl rounded-md'>Show in Template</button>
+                </div>
+                <div className=' flex w-full gap-5 justify-center mb-12 align-middle items-center relative'>
                     <label htmlFor="schoolName" className=' text-2xl'>
                         Enter School Name <span className=' text-red-500'>*</span>
                     </label>
@@ -64,7 +67,7 @@ const Admin = () => {
                         name='schoolName'
                         onChange={handleFieldChange}
                         placeholder='Enter School Name Here....'
-                        className="px-4 py-3 bg-[#f0f1f2] focus:bg-transparent text-black w-[70%] text-sm border outline-[#007bff] rounded transition-all placeholder:text-xl pl-[48px] text-xl"
+                        className="px-4 py-3 bg-[#f0f1f2] focus:bg-transparent text-black w-[70%] border outline-[#007bff] rounded transition-all placeholder:text-xl pl-[48px] text-xl"
                     />
 
                     {/* <button className=' px-5 py-2 text-xl bg-blue-600 text-white rounded-lg flex gap-2 justify-center items-center align-middle'>
